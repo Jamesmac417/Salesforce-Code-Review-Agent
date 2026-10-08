@@ -20,7 +20,9 @@ case "$SCOPE" in
     fi
     TARGET="$(cd "$TARGET" && pwd)"
     if [[ ! -f "$TARGET/sfdx-project.json" && ! -d "$TARGET/force-app" ]]; then
-      echo "Warning: target does not look like a Salesforce DX project. Continuing." >&2
+      echo "error:target does not look like a valid Salesforce DX project.">&2
+         echo "Expected sfdx-project.json or force-app folder in $TARGET">&2
+    exit 1
     fi
     copy_tree "$ROOT/.cursor/skills" "$TARGET/.cursor/skills"
     copy_tree "$ROOT/.cursor/agents" "$TARGET/.cursor/agents"
